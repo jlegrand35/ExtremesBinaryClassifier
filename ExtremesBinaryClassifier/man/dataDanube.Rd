@@ -8,18 +8,14 @@
 Bavarian Environmental Agency (\url{http://www.gkd.bayern.de})
 }
 \usage{
-data(dataDanube)
+graphicalExtremes::danube
 }
 \description{
-Daily river discharges, measured in m^3/s, at 31 stations spread over the upper Danube basin. The data set covers the period from 1960 to 2010 but only the months of June, July, and August are retained. These data are already declustered following  Mhalla et al.[2020] methodology.
+Daily river discharges, measured in \eqn{m^3/s}, at 31 stations spread over the upper Danube basin. The data set covers the period from 1960 to 2010 but only the months of June, July, and August are retained. These data are already declustered following  Mhalla et al.(2020) methodology.
 }
 \examples{
-data(dataDanube)
+graphicalExtremes::danube
 }
 \references{
 Asadi, P., Davison, A.C.,  and Engelke, S. (2015). Extremes on river networks. The Annals of Applied Statistics, 9(4), 2023-2050.
-
-Mhalla, L., Chavez-Demoulin, V., and Dupuis, D.J. (2020). Causal mechanism of extreme river discharges inthe upper danube basin network. Journal of the Royal Statistical Society: Series C (Applied Statistics), 69(4), 741-764.
-
-Legrand et al.
 }

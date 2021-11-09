@@ -61,8 +61,9 @@ FrechetMargin = function(X){
 #' ## Comparison with regression tree
 #' Ytraineps <- 2*(Htrain > eps_u) - 1
 #' treeclass <- rpart(y~., data=data.frame(x=Xtrain, y = as.factor(Ytraineps)), method = "class")
-#' gtree <- as.numeric(predict(treeclass, newdata = data.frame(x = Xtest, y = Ytest), type="class"))
-#' gtreeeps <- as.numeric(predict(treeclass, newdata = data.frame(x = Xtest, y = Ytesteps), type = 'class'))
+#' gtree <- as.numeric(as.character(predict(treeclass, newdata = data.frame(x = Xtest, y = Ytest), type="class")))
+#' gtreeeps <- as.numeric(as.character(predict(treeclass,
+#' newdata = data.frame(x = Xtest, y = Ytesteps), type = 'class')))
 #' EmpiricalRisk(Y = Ytest, Y.eps = Ytesteps, g = gtree, g.eps = gtreeeps, epsilon = eps)
 EmpiricalRisk = function(Y, Y.eps = NULL, g, g.eps = NULL, epsilon = 0){
   stopifnot(length(Y) == length(g))
@@ -141,16 +142,14 @@ EmpRiskLin = function(theta, X, thresh, H){
 
 #' Danube river discharges
 #'
-#' Daily river discharges, measured in m^3/s, at 31 stations spread over the upper Danube basin. The data set covers the period from 1960 to 2010 but only the months of June, July, and August are retained. These data are already declustered following  Mhalla et al.[2020] methodology.
+#' Daily river discharges, measured in \eqn{m^3/s}, at 31 stations spread over the upper Danube basin. The data set covers the period from 1960 to 2010 but only the months of June, July, and August are retained. These data are already declustered following  Mhalla et al.(2020) methodology.
 #' @docType data
 #' @name dataDanube
-#' @usage data(dataDanube)
+#' @usage graphicalExtremes::danube
 #' @references Asadi, P., Davison, A.C.,  and Engelke, S. (2015). Extremes on river networks. The Annals of Applied Statistics, 9(4), 2023-2050.
-#' @references Mhalla, L., Chavez-Demoulin, V., and Dupuis, D.J. (2020). Causal mechanism of extreme river discharges inthe upper danube basin network. Journal of the Royal Statistical Society: Series C (Applied Statistics), 69(4), 741-764.
-#' @references Legrand et al.
 #' @source Bavarian Environmental Agency (\url{http://www.gkd.bayern.de})
 #'
 #' @examples
-#' data(dataDanube)
+#' graphicalExtremes::danube
 NULL
 

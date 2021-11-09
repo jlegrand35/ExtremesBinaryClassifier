@@ -59,8 +59,9 @@ EmpiricalRisk(Y = Ytest, Y.eps = Ytesteps, g = glin, g.eps = glineps, epsilon = 
 ## Comparison with regression tree
 Ytraineps <- 2*(Htrain > eps_u) - 1
 treeclass <- rpart(y~., data=data.frame(x=Xtrain, y = as.factor(Ytraineps)), method = "class")
-gtree <- as.numeric(predict(treeclass, newdata = data.frame(x = Xtest, y = Ytest), type="class"))
-gtreeeps <- as.numeric(predict(treeclass, newdata = data.frame(x = Xtest, y = Ytesteps), type = 'class'))
+gtree <- as.numeric(as.character(predict(treeclass, newdata = data.frame(x = Xtest, y = Ytest), type="class")))
+gtreeeps <- as.numeric(as.character(predict(treeclass,
+newdata = data.frame(x = Xtest, y = Ytesteps), type = 'class')))
 EmpiricalRisk(Y = Ytest, Y.eps = Ytesteps, g = gtree, g.eps = gtreeeps, epsilon = eps)
 }
 \references{

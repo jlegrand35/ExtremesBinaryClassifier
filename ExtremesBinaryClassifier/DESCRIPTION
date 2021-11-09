@@ -8,8 +8,9 @@ Authors@R: c(person("Legrand", "Juliette", , email="juliette.legrand at lsce.ips
 Author: Juliette Legrand [aut, cre]
 Maintainer: Juliette Legrand <juliette.legrand@lsce.ipsl.fr>
 Depends: R (>= 3.1.0)
-Imports: 
-Suggests: 
+Imports: graphicalExtremes
+Remotes: github::sebastian-engelke/graphicalExtremes
+Suggests: glmnet, randomForest, rpart, e1071
 License: to add (ex. GPL (>= 2))
 Encoding: UTF-8
 URL: to add
