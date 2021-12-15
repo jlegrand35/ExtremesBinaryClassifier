@@ -8,3 +8,4 @@ build_manual() #generate manual
 
 setwd("..")
 install("ExtremesBinaryClassifier") #install package
+library(ExtremesBinaryClassifier)
