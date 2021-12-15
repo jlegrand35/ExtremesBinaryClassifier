@@ -2,7 +2,7 @@ Package: ExtremesBinaryClassifier
 Type: Package
 Description: Provides functions for the empirical risk estimation of binary classifiers for extremes, as proposed in Legrand, J., Naveau, P., and Oesting, M. (2021) <add doi here>.
 Title: Evaluation of binary classifiers for extremes
-Version: 1.0.1
+Version: 0.1.0
 Date: 2021-10-22
 Authors@R: c(person("Legrand", "Juliette", , email="juliette.legrand at lsce.ipsl.fr", role = c("aut", "cre")))
 Author: Juliette Legrand [aut, cre]
@@ -10,9 +10,9 @@ Maintainer: Juliette Legrand <juliette.legrand@lsce.ipsl.fr>
 Depends: R (>= 3.1.0)
 Imports: graphicalExtremes
 Remotes: github::sebastian-engelke/graphicalExtremes
-Suggests: glmnet, randomForest, rpart, e1071
+Suggests: rpart, randomForest, glmnet, ...
 License: to add (ex. GPL (>= 2))
 Encoding: UTF-8
 URL: to add
 RoxygenNote: 7.1.2
-LazyData: true
+LazyData: TRUE
