@@ -4,7 +4,7 @@
 \alias{LinearClassifier}
 \title{Optimal linear classifier}
 \usage{
-LinearClassifier(X, thresh, H, initials)
+LinearClassifier(X, thresh, H, initials, epsilon)
 }
 \arguments{
 \item{X}{numeric matrix corresponding to the input data we want to classify}
@@ -14,6 +14,8 @@ LinearClassifier(X, thresh, H, initials)
 \item{H}{numeric vector corresponding to the latent variable that we wish to predict}
 
 \item{initials}{initial values for the parameters of the linear classifier to be optimized over}
+
+\item{epsilon}{single numeric giving the amount of data to remove}
 }
 \value{
 theta value of the linear classifier
@@ -34,7 +36,7 @@ P <- 1/(runif(nsim)^(1/2))
 H <- X1 + P
 u <- quantile(H,probs=0.97)
 init <- lm(H ~ X1 + X2, data=data.frame(H = H, X1 = X1, X2 = X2))$coefficients[2:3]
-LinearClassifier(X = cbind(X1, X2), thresh = u, H = H, initials = init)
+LinearClassifier(X = cbind(X1, X2), thresh = u, H = H, initials = init, epsilon = 0)
 }
 \references{
 Legrand et al.

@@ -4,7 +4,7 @@
 \alias{EmpiricalRisk}
 \title{A Risk estimation function}
 \usage{
-EmpiricalRisk(Y, Y.eps = NULL, g, g.eps = NULL, epsilon = 0)
+EmpiricalRisk(Y, Y.eps = NULL, g, g.eps = NULL, epsilon = TRUE)
 }
 \arguments{
 \item{Y}{vector of the true binary outcomes}
@@ -15,7 +15,7 @@ EmpiricalRisk(Y, Y.eps = NULL, g, g.eps = NULL, epsilon = 0)
 
 \item{g.eps}{vector of the predicted binary outcomes in the extreme region from the same classifier}
 
-\item{epsilon}{single numeric between 0 and 1 giving the amount of data we want to remove}
+\item{epsilon}{logical value indicating whether the classic risk function should be used or the extended version}
 }
 \description{
 Compute the empirical risk defined ???? given the output of a classifier g and the true binary outcomes Y. If epsilon>0, supply the values of the trained classifier on the thresholded data g.eps and the true binary outcomes Y.eps := +1 if H > eps_u and -1 otherwise.
@@ -45,24 +45,47 @@ Htrain <- H[ii]
 Htest <- H[-ii]
 
 ## Linear classifier
-## Train the linear classifier
-init <- lm(H ~ X1 + X2, data = data.frame(H = H, X1 = X1, X2 = X2))$coefficients[2:3]
-linclass <- LinearClassifier(X = Xtrain, thresh = eps_u, H = Htrain, initials = init)
-## Compute the predicted binary outcome on the test set from all the data and only with the extreme region data
-glin <- 2*(as.vector(linclass$theta \%*\% t(Xtest)) > u) - 1
-glineps <- 2*(as.vector(linclass$theta \%*\% t(Xtest)) > eps_u) - 1
+#~~~~~~~~~~~~~~~~~~~
+## Train the linear classifier with mass
+init0 <- lm(H ~ X1 + X2, data = data.frame(H = H, X1 = X1, X2 = X2))$coefficients[2:3]
+linclass <- LinearClassifier(X = Xtrain, thresh = u, H = Htrain, initials = init0, epsilon=0)$theta
+## Compute the predicted binary outcome on the test set from all the data
+glin <- 2*(as.vector(linclass \%*\% t(Xtest)) > u) -1
+#~~~~~~~~~~~~~~~~~~~
+## Train the linear classifier without mass
+glin0 <- init0 \%*\% t(cbind(X1,X2))
+init <- lm(H ~ X1 + X2, data=data.frame(H = H[H>eps_u & glin0>eps_u], X1 = X1[H>eps_u & glin0>eps_u],
+          X2 = X2[H>eps_u & glin0>eps_u]))$coefficients[2:3]
+linclass.eps <- LinearClassifier(X = Xtrain[,c(1,2)], thresh = u, H = Htrain, initials = init,
+                  epsilon = eps)$theta
+## Compute the predicted binary outcome on the test set from the extreme region data
+glineps <- 2*(as.vector(linclass.eps \%*\% t(Xtest)) > eps_u) - 1
+#~~~~~~~~~~~~~~~~~~~
 ## Compute the true binary outcome on the test set from all the data and only with the extreme region data
 Ytesteps <- 2*(Htest > eps_u) - 1
 Ytest <- 2*(Htest > u) - 1
-EmpiricalRisk(Y = Ytest, Y.eps = Ytesteps, g = glin, g.eps = glineps, epsilon = eps)
+#~~~~~~~~~~~~~~~~~~~
+## Compute the associated risk
+EmpiricalRisk(Y = Ytest, Y.eps = Ytesteps, g = glin, g.eps = glineps, epsilon = TRUE)
 
 ## Comparison with regression tree
+#~~~~~~~~~~~~~~~~~~~
+## Train the tree classifier with mass
+Ytrain <- 2*(Htrain > u) - 1
+treeclass <- rpart(y~., data=data.frame(x = Xtrain, y = as.factor(Ytrain)), method = "class")
+## Compute the predicted binary outcome on the test set from all the data
+gtree <- as.numeric(as.character(predict(treeclass, newdata = data.frame(x = Xtest, y = Ytest),
+           type="class")))
+#~~~~~~~~~~~~~~~~~~~
+## Train the tree classifier without mass
 Ytraineps <- 2*(Htrain > eps_u) - 1
-treeclass <- rpart(y~., data=data.frame(x=Xtrain, y = as.factor(Ytraineps)), method = "class")
-gtree <- as.numeric(as.character(predict(treeclass, newdata = data.frame(x = Xtest, y = Ytest), type="class")))
-gtreeeps <- as.numeric(as.character(predict(treeclass,
-newdata = data.frame(x = Xtest, y = Ytesteps), type = 'class')))
-EmpiricalRisk(Y = Ytest, Y.eps = Ytesteps, g = gtree, g.eps = gtreeeps, epsilon = eps)
+treeclasseps <- rpart(y~., data=data.frame(x = Xtrain, y = as.factor(Ytraineps)), method = "class")
+## Compute the predicted binary outcome on the test set from the extreme region data
+gtreeeps <- as.numeric(as.character(predict(treeclasseps, newdata = data.frame(x = Xtest, y = Ytesteps),
+              type = 'class')))
+#~~~~~~~~~~~~~~~~~~~
+## Compute the associated risk
+EmpiricalRisk(Y = Ytest, Y.eps = Ytesteps, g = gtree, g.eps = gtreeeps, epsilon = TRUE)
 }
 \references{
 Legrand et al.
