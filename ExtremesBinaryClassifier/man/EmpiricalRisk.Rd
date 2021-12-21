@@ -18,7 +18,7 @@ EmpiricalRisk(Y, Y.eps = NULL, g, g.eps = NULL, epsilon = TRUE)
 \item{epsilon}{logical value indicating whether the classic risk function should be used or the extended version}
 }
 \description{
-Compute the empirical risk defined ???? given the output of a classifier g and the true binary outcomes Y. If epsilon>0, supply the values of the trained classifier on the thresholded data g.eps and the true binary outcomes Y.eps := +1 if H > eps_u and -1 otherwise.
+Compute the empirical risk defined in Proposition 5 given the output of a classifier g and the true binary outcomes Y. If epsilon>0, supply the values of the trained classifier on the thresholded data g.eps and the true binary outcomes Y.eps := +1 if H > eps_u and -1 otherwise.
 }
 \details{
 to add
@@ -35,7 +35,7 @@ P <- 1/(runif(nsim)^(1/2))
 H <- X1 + P
 ## Compute the two thresholds u and epsilon_u
 u <- quantile(H,probs=0.97)
-eps <- 0.7
+eps <- 0.6
 eps_u <- u*eps
 ## Split data between training and testing sets
 ii <- sample.int(length(H), size = 0.7*length(H), replace=F)

@@ -3,7 +3,7 @@ rm(list = ls()) #Delete objects from the memory
 
 #' A Risk estimation function
 #'
-#' Compute the empirical risk defined ???? given the output of a classifier g and the true binary outcomes Y. If epsilon>0, supply the values of the trained classifier on the thresholded data g.eps and the true binary outcomes Y.eps := +1 if H > eps_u and -1 otherwise.
+#' Compute the empirical risk defined in Proposition 5 given the output of a classifier g and the true binary outcomes Y. If epsilon>0, supply the values of the trained classifier on the thresholded data g.eps and the true binary outcomes Y.eps := +1 if H > eps_u and -1 otherwise.
 #' @param Y vector of the true binary outcomes
 #' @param Y.eps vector of the true binary outcomes in the extreme region
 #' @param g vector of the predicted binary outcomes from a given classifier
@@ -24,7 +24,7 @@ rm(list = ls()) #Delete objects from the memory
 #' H <- X1 + P
 #' ## Compute the two thresholds u and epsilon_u
 #' u <- quantile(H,probs=0.97)
-#' eps <- 0.7
+#' eps <- 0.6
 #' eps_u <- u*eps
 #' ## Split data between training and testing sets
 #' ii <- sample.int(length(H), size = 0.7*length(H), replace=F)
@@ -92,7 +92,7 @@ EmpiricalRisk = function(Y, Y.eps = NULL, g, g.eps = NULL, epsilon = TRUE){
 
 #' Optimal linear classifier
 #'
-#' Compute the optimal linear classifier as defined in section ??? by minimizing the empirical risk (defined by emp.risk.lin).
+#' Compute the optimal linear classifier as defined in Appendix B by minimizing the empirical risk (defined by emp.risk.lin).
 #' Initial values must be provided which can be estimated by performing a classical linear regression (lm) for example.
 #' @param X numeric matrix corresponding to the input data we want to classify
 #' @param thresh single numeric giving the threshold over which an extreme event is defined

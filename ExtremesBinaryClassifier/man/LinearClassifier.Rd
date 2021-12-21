@@ -23,7 +23,7 @@ theta value of the linear classifier
 \item{Risk}{the value of the risk corresponding theta}
 }
 \description{
-Compute the optimal linear classifier as defined in section ??? by minimizing the empirical risk (defined by emp.risk.lin).
+Compute the optimal linear classifier as defined in Appendix B by minimizing the empirical risk (defined by emp.risk.lin).
 Initial values must be provided which can be estimated by performing a classical linear regression (lm) for example.
 }
 \examples{
