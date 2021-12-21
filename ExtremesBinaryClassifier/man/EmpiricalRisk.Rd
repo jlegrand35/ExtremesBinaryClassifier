@@ -20,9 +20,6 @@ EmpiricalRisk(Y, Y.eps = NULL, g, g.eps = NULL, epsilon = TRUE)
 \description{
 Compute the empirical risk defined in Proposition 5 given the output of a classifier g and the true binary outcomes Y. If epsilon>0, supply the values of the trained classifier on the thresholded data g.eps and the true binary outcomes Y.eps := +1 if H > eps_u and -1 otherwise.
 }
-\details{
-to add
-}
 \examples{
 require(rpart)
 
