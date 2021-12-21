@@ -1,6 +1,8 @@
 # ExtremesBinaryClassifier
-Package for extreme binary classifiers
 
+This R package provides usefull functions to implement the empirical estimation of the risk function developed in \textit{Legrand et al. (2021)} and can be used either to reproduce the results of the conducted classifier comparisons or to perform new comparisons using other binary classifiers.
+Examples are provided in the help file for each function.
+Other example of codes are available upon request.
 
 # Installation
 
