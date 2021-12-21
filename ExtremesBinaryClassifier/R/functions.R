@@ -3,7 +3,7 @@ rm(list = ls()) #Delete objects from the memory
 
 #' A Risk estimation function
 #'
-#' Compute the empirical risk defined in Proposition 5 given the output of a classifier g and the true binary outcomes Y. If epsilon>0, supply the values of the trained classifier on the thresholded data g.eps and the true binary outcomes Y.eps := +1 if H > eps_u and -1 otherwise.
+#' Compute the empirical risk defined in Proposition 5 given the output of a classifier g and the true binary outcomes Y. If \eqn{\varepsilon>0}, supply the values of the trained classifier on the thresholded data \eqn{g(X;\varepsilon u)} and the true binary outcomes \eqn{Y^{(\varepsilon u)} := +1} if \eqn{H > \varepsilon u} and \eqn{-1} otherwise.
 #' @param Y vector of the true binary outcomes
 #' @param Y.eps vector of the true binary outcomes in the extreme region
 #' @param g vector of the predicted binary outcomes from a given classifier
