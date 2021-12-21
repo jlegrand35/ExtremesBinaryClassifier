@@ -10,7 +10,6 @@ rm(list = ls()) #Delete objects from the memory
 #' @param g.eps vector of the predicted binary outcomes in the extreme region from the same classifier
 #' @param epsilon logical value indicating whether the classic risk function should be used or the extended version
 #' @references Legrand et al.
-#' @details to add
 #' @seealso \link{LinearClassifier}
 #' @examples
 #' require(rpart)
